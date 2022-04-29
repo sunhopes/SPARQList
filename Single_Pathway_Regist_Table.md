@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # glycan pathway list(Glycosmos Table)  
+=======
+# Single Pathway Regist Glycosmos Table  
+>>>>>>> d35be139315527dff417baa8719807f3cd17673e
 
 ## Parameters
 * `order`
@@ -14,6 +18,7 @@
 http://path-virtuoso:8890/sparql
 
 ## `list`
+<<<<<<< HEAD
 ```sparql
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX bp: <http://www.biopax.org/release/biopax-level3.owl#>
@@ -21,6 +26,28 @@ PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
 PREFIX sio: <http://semanticscience.org/resource/>
 SELECT DISTINCT ?pw_id str(?pathway_name) as ?pw_name str(?pathway_category) as ?pw_category ?pathway_category_id str(?pathway_disease) as ?pw_disease (GROUP_CONCAT(DISTINCT ?enzymes_name ; separator = ",") AS ?enzymes_names) (GROUP_CONCAT(DISTINCT ?product_glycan_ids ; separator = ",") AS ?glycan_ids)
 FROM <http://localhost:8890/repo_test1>
+=======
+
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bp: <http://www.biopax.org/release/biopax-level3.owl#>
+PREFIX cco: <http://www.biocyc.org/owl/ontologies/ocelot/cco/#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX glycordf: <http://purl.jp/bio/12/glyco/glycan#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+PREFIX gno: <http://purl.obolibrary.org/obo/GNO:>
+PREFIX glycosmos: <http://glycosmos.org/biopax/1/562#>
+PREFIX glytoucan: <http://identifiers.org/glytoucan/>
+PREFIX uniprot: <http://identifiers.org/uniprot/>
+PREFIX pubchem: <http://pubchem.ncbi.nlm.nih.gov/compound/>
+PREFIX ncbitax: <http://purl.bioontology.org/ontology/NCBITAXON/>
+PREFIX sio: <http://semanticscience.org/resource/>
+
+SELECT DISTINCT ?pw_id str(?pathway_name) as ?pw_name str(?pathway_category) as ?pw_category ?pathway_category_id str(?pathway_disease) as ?pw_disease (GROUP_CONCAT(DISTINCT ?enzymes_name ; separator = ",") AS ?enzymes_names) (GROUP_CONCAT(DISTINCT ?product_glycan_ids ; separator = ",") AS ?glycan_ids)
+FROM <http://localhost:8890/repo_test1>
+
+>>>>>>> d35be139315527dff417baa8719807f3cd17673e
 WHERE{
   # Pathway Name
   ?pw rdf:type bp:Pathway .
@@ -45,7 +72,13 @@ WHERE{
   ?product_glycan  bp:id ?product_glycan_id.
   BIND (replace(str(?product_glycan_id), 'http://identifiers.org/glytoucan/', '') AS ?product_glycan_ids)
   BIND (replace(str(?pw), 'http://glycosmos.org/biopax/1/562#GC-Pathway-', '') AS ?pw_id)
+<<<<<<< HEAD
   {{search}}
+=======
+  
+  {{search}}
+  
+>>>>>>> d35be139315527dff417baa8719807f3cd17673e
   }
 ORDER BY {{order}}
 {{limit}}

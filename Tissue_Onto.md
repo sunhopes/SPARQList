@@ -11,7 +11,11 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 
 SELECT DISTINCT  ?t_id ?t_name ?t_child_id ?t_child_name
+<<<<<<< HEAD
 FROM <http://8890/brendaTissue>
+=======
+
+>>>>>>> d35be139315527dff417baa8719807f3cd17673e
 WHERE {
     ?t_id rdfs:subClassOf* obo:BTO_0000000 .
     ?t_child_id rdfs:subClassOf ?t_id .
