@@ -18,7 +18,8 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX : <http://glycosmos.org/biopax/pathway#>
 INSERT DATA
 {
-  GRAPH <http://localhost:8890/testSpace>  
+  #GRAPH <http://localhost:8890/testSpace> 
+  GRAPH <http://localhost:8890/testSpace2>      
   ##GRAPH <http://localhost:8890/proteinPathwayUpload>
     {    
 	:{{pw_id}}_GC-Catalysis{{catalysis_node_num}} rdf:type bp:Catalysis ;

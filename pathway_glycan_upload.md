@@ -1,7 +1,7 @@
 # glycan_resource_upload
 
 ## Parameters
-* `glytoucan_text_name`  Input text of glycan structure
+    * `glytoucan_text_name`  Input text of glycan structure
 ## Endpoint
 http://path-virtuoso:8890/sparql
 
@@ -19,7 +19,8 @@ PREFIX : <http://glycosmos.org/biopax/pathway#>
 INSERT DATA
 {
     ##GRAPH <http://localhost:8890/proteinPathwayUpload>
-    GRAPH <http://localhost:8890/testSpace>
+    #GRAPH <http://localhost:8890/testSpace>
+    GRAPH <http://localhost:8890/testSpace2>
     {      
         :{{pw_id}}_GC-{{glycan_node_name}}  bp:type bp:SmallMolecule ;
                                             bp:type glyco:Saccharide ;

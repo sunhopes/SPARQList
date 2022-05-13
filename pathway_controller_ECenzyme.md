@@ -1,10 +1,10 @@
 # pathway_controller_ECenzyme
 
 ## Parameters
-* `control_action` controller action value(activation or inhibition)
-* `uniprot_name` if resource is protein
-* `control_complex_name` if resource is complex
-* `EC_enzyme_name` if resource is protein
+	* `control_action` controller action value(activation or inhibition)
+	* `uniprot_name` if resource is protein
+	* `control_complex_name` if resource is complex
+	* `EC_enzyme_name` if resource is protein
 ## Endpoint
 http://path-virtuoso:8890/sparql
 
@@ -17,8 +17,10 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX : <http://glycosmos.org/biopax/pathway#>
 INSERT DATA
 {
-  GRAPH <http://localhost:8890/testSpace>  
-  ##GRAPH <http://localhost:8890/proteinPathwayUpload>
+  #GRAPH <http://localhost:8890/proteinPathwayUpload>
+  #GRAPH <http://localhost:8890/testSpace>
+  GRAPH <http://localhost:8890/testSpace2>
+  
     {  
          :{{pw_id}}_GC-{{catalysis_controller}} rdf:type bp:Protein;
                     bp:cellularLocation :{{pw_id}}_GC-CellularLocationVocabulary{{protein_node_num}} ;

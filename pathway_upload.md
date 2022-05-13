@@ -3,10 +3,7 @@
 ## Parameters
 * `reactionIds`  reaction number array
 * `pathway_id`  pathway id
-<<<<<<< HEAD
 
-=======
->>>>>>> d35be139315527dff417baa8719807f3cd17673e
 ## `reactionArray`
 ```javascript
 ({reactionIds}) => {
@@ -16,10 +13,7 @@
   return false;
 }
 ```
-<<<<<<< HEAD
 
-=======
->>>>>>> d35be139315527dff417baa8719807f3cd17673e
 ## `reactionArray_pwid`
 ```javascript
 ({reactionArray, pathway_id}) => {
@@ -28,7 +22,7 @@
     reaction_array.push({'val': reactionArray[i], 'id': pathway_id})
   }
   return reaction_array;
-  }
+}
 ```
 
 ## Endpoint
@@ -42,11 +36,10 @@ PREFIX bp: <http://www.biopax.org/release/biopax-level3.owl#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX : <http://glycosmos.org/biopax/pathway#>
-<<<<<<< HEAD
 
 INSERT DATA
 {
-    ###GRAPH <http://localhost:8890/proteinPathwayUpload>
+    #GRAPH <http://localhost:8890/proteinPathwayUpload>
     #GRAPH <http://localhost:8890/testSpace>
     GRAPH <http://localhost:8890/testSpace2>      
     { 
@@ -55,76 +48,29 @@ INSERT DATA
         :GC-Pathway{{this.id}} bp:pathwayOrder :{{this.id}}_GC-PathwayStep{{this.val}} .
       {{/each}}
         
-        
-     # :GC-Pathway{{pathway_id}} rdf:type bp:Pathway ;
-             # bp:displayName "{{pathway_name}}"^^xsd:string ;
-=======
-INSERT DATA
-{
-    ###GRAPH <http://localhost:8890/proteinPathwayUpload>
-    GRAPH <http://localhost:8890/testSpace>
-    { 
-      {{#each reactionArray_pwid}}
-        :GC-Pathway{{this.id}} bp:pathwayComponent :GC-BiochemicalReaction{{this.val}} .
-        :GC-Pathway{{this.id}} bp:pathwayOrder :GC-PathwayStep{{this.val}} .
-      {{/each}}  
-        
       :GC-Pathway{{pathway_id}} rdf:type bp:Pathway ;
               bp:displayName "{{pathway_name}}"^^xsd:string ;
->>>>>>> d35be139315527dff417baa8719807f3cd17673e
-              
-              #bp:organism  :GC-Biosource{{pathway_id}};
-              #rdfs:seeAlso obo:{{ pathway_pw_category_id }};
-              #skos:altLabel "{{gpathway_pw_category}}"^^xsd:string ;
-<<<<<<< HEAD
-              #bp:comment "{{pathway_comment}}"^^xsd:string . 
-        
-      #:GC-Biosource{{pathway_id}} rdf:type bp:Biosource;
-               #bp:name  "{{pathway_taxon_name}}"^^xsd:string;
-               #bp:xref  :GC-UnificationXref{pathway_taxon_id}};
-               #bp:tissue :GC-TissueVocabulary{{pathway_id}} .
-              
-      #:GC-UnificationXref{{pathway_taxon_id}} rdf:type bp:UnificationXref;      
-               #bp:db "NCBI TAXON"^^xsd:string;
-               #bp:id "{{pathway_taxon_id}}"^^xsd:string .
-                
-      #:GC-TissueVocabulary{{pathway_id}} rdf:type bp:TissueVocabulary;
-               #bp:xref :GC-UnificationXref{{pathway_tissue_id}}.
-                     
-      #:GC-UnificationXref{{pathway_tissue_id}} rdf:type bp:UnificationXref ;
-              # bp:db "Brenda Tissue Ontology"^^xsd:string ;
-              # bp:id "{{pathway_tissue_id}}"^^xsd:string .          
-=======
-              bp:comment "{{pathway_comment}}"^^xsd:string . 
-     #:GC-Biosource{{pathway_id}} rdf:type bp:Biosource;
-              # bp:name  "{{pathway_taxon_name}}"^^xsd:string;
-              # bp:xref  glycosmos:GC-UnificationXref{pathway_taxon_id}};
-              # bp:tissue glycosmos:GC-TissueVoca{{pathway_id}};
-              # bp:cellType glycosmos:GC-CellVocabulary{{pathway_id}} .
+			  bp:organism  :GC-Biosource{{pathway_id}};
+              rdfs:seeAlso obo:{{pathway_pw_category_id }};
+              skos:altLabel "{{pathway_pw_category}}"^^xsd:string ;
+			  bp:comment "{{pathway_comment}}"^^xsd:string . 
        
-   # :GC-UnificationXref{{pathway_taxon_id}} rdf:type bp:UnificationXref;      
-           #     bp:db "NCBI TAXON"^^xsd:string;
-           #     bp:id "{{pathway_taxon_id}}"^^xsd:string .
+      :GC-Biosource{{pathway_id}} rdf:type bp:Biosource;
+              bp:name  "{{pathway_taxon_name}}"^^xsd:string;
+              bp:xref  :GC-UnificationXref{pathway_taxon_id}};
+              bp:tissue :GC-TissueVocabulary{{pathway_id}} .
+              
+      :GC-UnificationXref{{pathway_taxon_id}} rdf:type bp:UnificationXref;      
+              bp:db "NCBI TAXON"^^xsd:string;
+              bp:id "{{pathway_taxon_id}}"^^xsd:string .
                 
-   # :GC-TissueVoca-{{pathway_id}} rdf:type bp:TissueVocabulary;
-             #   bp:xref glycosmos:GC-UnificationXref{{pathway_tissue_id}}.
+      :GC-TissueVocabulary{{pathway_id}} rdf:type bp:TissueVocabulary;
+              bp:xref :GC-UnificationXref{{pathway_tissue_id}}.
                      
-   # :GC-UnificationXref{{pathway_tissue_id}} rdf:type bp:UnificationXref ;
-         #       bp:db "Brenda Tissue Ontology"^^xsd:string ;
-          #      bp:id "{{pathway_tissue_id}}"^^xsd:string .
-                
-    #:GC-CellVocabulary{{pathway_id}} rdf:type bp:CellVocabulary ;
-         #       bp:xref glycosmos:GC-UnificationXref{{pathway_cell_id}} .
-                
-   # :GC-UnificationXref{{pathway_cell_id}} rdf:type bp:UnificationXref ;
-         #       bp:db "Cell Ontolgy"^^xsd:string ;
-          #      bp:id  obo:{{pathway_cell_id}}.
-                
-  #  :GC-UnificationXref-{{ pathway_taxon_id}} rdf:type bp:UnificationXref ;
-    #            bp:db "NCBI taxon ontology"^^xsd:string ;
-   #             bp:id  ncbitax:{{pathway_taxon_id}} .            
+      :GC-UnificationXref{{pathway_tissue_id}} rdf:type bp:UnificationXref ;
+              bp:db "Brenda Tissue Ontology"^^xsd:string ;
+              bp:id "{{pathway_tissue_id}}"^^xsd:string .                     
     
->>>>>>> d35be139315527dff417baa8719807f3cd17673e
     }   
  }
 

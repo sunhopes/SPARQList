@@ -1,4 +1,4 @@
-# pathway_complex_single
+# pathway_complex_single (GO info)
 
 ## Parameters
 * `pw_id` pathway id
@@ -36,13 +36,13 @@ INSERT DATA
             bp:name "{{complex_onto_name}}"^^xsd:string ;
             bp:displayName "{{complex_display_name}}"^^xsd:string .
       
-     #:{{pw_id}}_{{rxn_id}}_CellularLocationVocabulary{{complex_node_num}} rdf:type bp:CellularLocationVocabulary ;
-            #bp:xref :{{pw_id}}_{{rxn_id}}UnificationXref{{complex_node_num}} ;
-            #bp:term "{{cellular_location}}"^^xsd:string .
+     :{{pw_id}}_{{rxn_id}}_CellularLocationVocabulary{{complex_node_num}} rdf:type bp:CellularLocationVocabulary ;
+            bp:xref :{{pw_id}}_{{rxn_id}}UnificationXref{{complex_node_num}} ;
+            bp:term "{{cellular_location}}"^^xsd:string .
       
-     #:{{pw_id}}_{{rxn_id}}UnificationXref{{complex_node_num}} rdf:type bp:UnificationXref ;
-            #bp:db "GENE ONTOLOGY"^^xsd:string ;
-            #bp:id "{{celllar_location_id}}"^^xsd:string .
+     :{{pw_id}}_{{rxn_id}}UnificationXref{{complex_node_num}} rdf:type bp:UnificationXref ;
+            bp:db "GENE ONTOLOGY"^^xsd:string ;
+            bp:id "{{celllar_location_id}}"^^xsd:string .
     }   
  }
 
