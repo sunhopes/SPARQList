@@ -13,7 +13,6 @@ http://path-virtuoso:8890/sparql
 ```sparql
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX bp: <http://www.biopax.org/release/biopax-level3.owl#>
-<<<<<<< HEAD
 PREFIX glytoucan: <http://identifiers.org/glytoucan/>
 PREFIX : <http://glycosmos.org/biopax/pathway#>
 INSERT DATA
@@ -24,54 +23,27 @@ INSERT DATA
     {    
     ### Protein
     :{{pw_id}}_GC-{{protein_node_name}} rdf:type bp:Protein ;
-            #bp:cellularLocation :{{pw_id}}_GC-CellularLocationVocabulary{{protein_node_num}} ;
-            #bp:xref :{{pw_id}}_GC-UnificationXref{{unixref_num_1}} ;
-            #bp:name "{{uniprot_name}}"^^xsd:string  ;
-=======
-PREFIX cco: <http://www.biocyc.org/owl/ontologies/ocelot/cco/#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
-PREFIX glytoucan: <http://identifiers.org/glytoucan/>
-PREFIX uniprot: <http://identifiers.org/uniprot/>
-PREFIX pubchem: <http://pubchem.ncbi.nlm.nih.gov/compound/>
-PREFIX ncbitax: <http://purl.bioontology.org/ontology/NCBITAXON/>
-PREFIX sio: <http://semanticscience.org/resource/>
-PREFIX : <http://glycosmos.org/biopax/pathway#>
-INSERT DATA
-{
-    GRAPH <http://localhost:8890/proteinPathwayUpload>
-    {    
-    ### Protein
-    :GC-{{protein_node_name}} rdf:type bp:Protein ;
-            bp:cellularLocation :GC-CellularLocationVocabulary{{protein_node_num}} ;
-            #bp:xref :GC-UnificationXref{{unixref_num_1}} ;
-            bp:name "{{uniprot_name}}"^^xsd:string  ;
->>>>>>> d35be139315527dff417baa8719807f3cd17673e
+            bp:cellularLocation :{{pw_id}}_GC-CellularLocationVocabulary{{protein_node_num}} ;
+            bp:xref :{{pw_id}}_GC-UnificationXref{{unixref_num_1}} ;
             bp:displayName "{{symbol_name}}"^^xsd:string .
       
-     ### ProteinXref
+     ## Xref_first for protein
     {{#if uniprot_name}}
-<<<<<<< HEAD
       :{{pw_id}}_GC-{{protein_node_name}}  bp:name "{{uniprot_name}}"^^xsd:string  ;
-            bp:xref :{{pw_id}}_GC-UnificationXref{{unixref_num_1}} .   
+                bp:xref  :{{pw_id}}_GC-UnificationXref{{unixref_num_1}} .   
+      
       :{{pw_id}}_GC-UnificationXref{{unixref_num_1}} rdf:type bp:UnificationXref ;
-=======
-      :GC-{{protein_node_name}} bp:xref :GC-UnificationXref{{unixref_num_1}} .   
-      :GC-UnificationXref{{unixref_num_1}} rdf:type bp:UnificationXref ;
->>>>>>> d35be139315527dff417baa8719807f3cd17673e
-            bp:db "UniProt"^^xsd:string ;
-            bp:id "{{uniprot_id}}"^^xsd:string . 
+				bp:db "UniProt"^^xsd:string ;
+                bp:id "{{ uniprot_id }}"^^xsd:string .
+    
     {{/if}}  
       
-    ### CellularLocation
-<<<<<<< HEAD
-   {{#if celllar_location}}  
-    :{{pw_id}}_GC-CellularLocationVocabulary{{protein_node_num}} rdf:type bp:CellularLocationVocabulary ;
+    ## Xref_second for CellularLocation
+	{{#if celllar_location}}  
+      :{{pw_id}}_GC-CellularLocationVocabulary{{protein_node_num}} rdf:type bp:CellularLocationVocabulary ;
             bp:xref :{{pw_id}}_GC-UnificationXref{{unixref_num_2}} ;
             bp:term "{{celllar_location}}"^^xsd:string . 
-      
-    ### CellVocaXref  
+     
     :{{pw_id}}_GC-UnificationXref{{unixref_num_2}} rdf:type bp:UnificationXref ;
             bp:db "GENE ONTOLOGY"^^xsd:string ;
             bp:id "{{celllar_location_id}}"^^xsd:string .
@@ -90,12 +62,12 @@ INSERT DATA
               bp:sequenceIntervalBegin :{{pw_id}}_GC-SequenceSite{{fragment_node_first}} ;
               bp:sequenceIntervalEnd :{{pw_id}}_GC-SequenceSite{{fragment_node_second}} .
 
-      ### SequenceSite(for Fragment)
+      ### SequenceSite(for Fragment start site)
       :{{pw_id}}_GC-SequenceSite{{fragment_node_first}} rdf:type bp:SequenceSite ;
               bp:positionStatus "EQUAL"^^xsd:string ;
               bp:sequencePosition "{{seq_begin}}"^^xsd:string .
 
-      ### SequenceSite (for Fragment)
+      ### SequenceSite (for Fragment end site)
        :{{pw_id}}_GC-SequenceSite{{fragment_node_second}} rdf:type bp:SequenceSite ;
               bp:positionStatus "EQUAL"^^xsd:string 
               bp:sequencePosition "{{seq_end}}"^^xsd:string .
@@ -103,17 +75,18 @@ INSERT DATA
       
   {{#if modify_site}}  
     :{{pw_id}}_GC-{{protein_node_name}}  bp:feature :{{pw_id}}_GC-ModificationFeature{{protein_node_num}}.
-    ### ModificationFeature (Proein) 
+    
+    ## ModificationFeature (Proein) 
     :{{pw_id}}_GC-ModificationFeature{{protein_node_num}} rdf:type bp:ModificationFeature ;
            bp:featureLocation :{{pw_id}}_GC-SequenceSite{{modify_node_num}} ;
            bp:modificationType :{{pw_id}}_GC-SequenceModificationVocabulary{{protein_node_num}} . 
    
-    ### SequenceSite for Modification features (modification site)
+    ## SequenceSite for Modification features (modification site)
     :{{pw_id}}_GC-SequenceSite{{modify_node_num}} rdf:type bp:SequenceSite ;
             bp:positionStatus "EQUAL"^^xsd:string ;
             bp:sequencePosition "{{modify_site}}"^^xsd:string .
     
-    ### SequenceModificationVocabulary (modification ontology)   
+    ## SequenceModificationVocabulary (modification ontology)   
     :{{pw_id}}_GC-SequenceModificationVocabulary{{protein_node_num}} rdf:type bp:SequenceModificationVocabulary ;
             bp:xref :{{pw_id}}_{{rxn_id}}_GC-UnificationXref{{unixref_num_1}};
             bp:term "{{modify_type}}"^^xsd:string .
@@ -121,60 +94,7 @@ INSERT DATA
             bp:db "MOD"^^xsd:string ;
             bp:id "MOD:"{{modify_id}}^^xsd:string .
   {{/if}} 
-=======
-    {{#if celllar_location}}  
-    :GC-CellularLocationVocabulary{{protein_node_num}} rdf:type bp:CellularLocationVocabulary ;
-            bp:xref :GC-UnificationXref{{unixref_num_2}} ;
-            bp:term "{{celllar_location}}"^^xsd:string . 
-      
-    ### CellVocaXref  
-    :GC-UnificationXref{{unixref_num_2}} rdf:type bp:UnificationXref ;
-            bp:db "GENE ONTOLOGY"^^xsd:string ;
-            bp:id "{{celllar_location_id}}"^^xsd:string .
-      
-    {{/if}}
-      
-   {{#if fragment_node_first}}
-     :GC-{{protein_node_name}} bp:feature :GC-FragmentFeature{{protein_node_num}} .
-   
-      ### FrgmentFeatures(protein size)  
-      :GC-FragmentFeature{{protein_node_num}} rdf:type bp:FragmentFeature ;
-              bp:featureLocation :GC-SequenceInterval{{protein_node_num}} .
 
-      ### SequenceInterval(for Fragmentation)
-      :GC-SequenceInterval{{protein_node_num}} rdf:type bp:SequenceInterval ;
-              bp:sequenceIntervalBegin :GC-SequenceSite{{fragment_node_first}} ;
-              bp:sequenceIntervalEnd :GC-SequenceSite{{fragment_node_second}} .
-
-      ### SequenceSite(for Fragment)
-      :GC-SequenceSite{{fragment_node_first}} rdf:type bp:SequenceSite ;
-              bp:positionStatus "EQUAL"^^xsd:string ;
-              bp:sequencePosition "{{seq_begin}}"^^xsd:integer .
-
-      ### SequenceSite (for Fragment)
-       :GC-SequenceSite{{fragment_node_second}} rdf:type bp:SequenceSite ;
-              bp:positionStatus "EQUAL"^^xsd:string ;
-            bp:sequencePosition "{{seq_end}}"^^xsd:integer .
-  {{/if}}   
-      
-  {{#if modify_site}}  
-    :GC-{{protein_node_name}}  bp:feature :GC-ModificationFeature{{protein_node_num}}.
-    ### ModificationFeature (Proein) 
-    :GC-ModificationFeature{{protein_node_num}} rdf:type bp:ModificationFeature ;
-           bp:featureLocation :GC-SequenceSite{{modify_node_num}} ;
-           bp:modificationType :GC-SequenceModificationVocabulary{{protein_node_num}} . 
-   
-    ### SequenceSite for Modification features (modification site)
-    :GC-SequenceSite{{modify_node_num}} rdf:type bp:SequenceSite ;
-            bp:positionStatus "EQUAL"^^xsd:string ;
-            bp:sequencePosition "{{modify_site}}"^^xsd:integer .
-    
-    ### SequenceModificationVocabulary (modification ontology)   
-    :GC-SequenceModificationVocabulary{{protein_node_num}} rdf:type bp:SequenceModificationVocabulary ;
-            bp:term "{{modify_type}}"^^xsd:string .
-   {{/if}}
->>>>>>> d35be139315527dff417baa8719807f3cd17673e
-    
     }   
  }
 

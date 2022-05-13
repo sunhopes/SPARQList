@@ -1,4 +1,4 @@
-# GlyCosmos Glycolipids List
+# GlyCosmos Glycolipids List(part)
 
 ## Endpoint
 http://path-virtuoso:8890/sparql

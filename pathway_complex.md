@@ -41,7 +41,7 @@ INSERT DATA
 {
     GRAPH <http://localhost:8890/testSpace2>
     #GRAPH <http://localhost:8890/testSpace>
-  ##GRAPH <http://localhost:8890/proteinPathwayUpload>
+    #GRAPH <http://localhost:8890/proteinPathwayUpload>
     {
      
 	:{{pw_id}}_GC-{{complex_node_name}} rdf:type bp:Complex ;
@@ -49,15 +49,13 @@ INSERT DATA
             #bp:cellularLocation :{{pw_id}}_{{rxn_id}}_CellularLocationVocabulary{{complex_node_num}} ;
             bp:displayName "{{complex_display_name}}"^^xsd:string .
       
-     #:{{pw_id}}_{{rxn_id}}_CellularLocationVocabulary{{complex_node_num}} rdf:type bp:CellularLocationVocabulary ;
-           # bp:xref :{{pw_id}}_{{rxn_id}}UnificationXref{{complex_node_num}} ;
-           # bp:term "{{complex_cell_loci}}"^^xsd:string .
+     :{{pw_id}}_{{rxn_id}}_CellularLocationVocabulary{{complex_node_num}} rdf:type bp:CellularLocationVocabulary ;
+           bp:xref :{{pw_id}}_{{rxn_id}}UnificationXref{{complex_node_num}} ;
+           bp:term "{{complex_cell_loci}}"^^xsd:string .
       
-      #:{{pw_id}}_{{rxn_id}}UnificationXref{{complex_node_num}} rdf:type bp:UnificationXref ;
-                 # bp:db "GENE ONTOLOGY"^^xsd:string ;
-                 # bp:id "{{complex_cell_loci_id}}"^^xsd:string .
-
-      
+     :{{pw_id}}_{{rxn_id}}UnificationXref{{complex_node_num}} rdf:type bp:UnificationXref ;
+            bp:db "GENE ONTOLOGY"^^xsd:string ;
+            bp:id "{{complex_cell_loci_id}}"^^xsd:string .
       
      {{#each componentArray}}
        :{{pwId}}_GC-{{complex_name}}  bp:component :{{pwId}}_GC-{{this.comp_node_name}}.

@@ -1,5 +1,11 @@
 # pathway_controller
 
+## Parameters
+* `pw_id` pathway id
+* `uniprot_name` uniprot protein name
+* `control_complex_name` complex input name
+* `control_action`control action direction input
+
 ## Endpoint
 http://path-virtuoso:8890/sparql
 
@@ -12,15 +18,16 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX : <http://glycosmos.org/biopax/pathway#>
 INSERT DATA
 {
+  #GRAPH <http://localhost:8890/proteinPathwayUpload>
   #GRAPH <http://localhost:8890/testSpace>
   GRAPH <http://localhost:8890/testSpace2>
-  ##GRAPH <http://localhost:8890/proteinPathwayUpload>
+ 
     {    
 	    :{{pw_id}}_GC-Catalysis{{catalysis_node_num}} rdf:type bp:Catalysis ;
             		bp:controlled :{{pw_id}}_GC-BiochemicalReaction{{catalysis_node_num}} ;
-            		bp:controller :{{pw_id}}_GC-{{control_node_name}} ;
+            		bp:controller :{{pw_id}}_GC-{{control_node_name}} .
             		##bp:xref :{{pw_id}}_GC-RelationshipXref{{unixref_num_2}}.
-      				bp:controlType "{{control_action}}"^^xsd:string .
+      				
       
       	:{{pw_id}}_GC-PathwayStep{{catalysis_node_num}} rdf:type bp:PathwayStep ;
             		bp:stepProcess :{{pw_id}}_GC-Catalysis{{catalysis_node_num}} .
@@ -28,7 +35,6 @@ INSERT DATA
        {{#if uniprot_name}}  # if protein
             :{{pw_id}}_GC-{{control_node_name}} rdf:type bp:Protein ;
             		bp:cellularLocation :{{pw_id}}_GC-CellularLocationVocabulary{{protein_node_num}} ;
-            		# bp:xref :{{pw_id}}_GC-UnificationXref{{unixref_num_1}} ;
             		bp:name "{{uniprot_name}}"^^xsd:string  ;
             		bp:displayName "{{symbol_name}}"^^xsd:string .
 			
@@ -54,34 +60,24 @@ INSERT DATA
                  	bp:db "GENE ONTOLOGY"^^xsd:string ;
                     bp:id "{{cell_location_id}}"^^xsd:string .
           
-          {{#if complex_goName}}
-            	:{{pw_id}}_GC-{{control_node_name}} bp:displayName "{{complex_goName}}"^^xsd:string .
+                {{#if complex_goName}}
+            	     :{{pw_id}}_GC-{{control_node_name}} bp:displayName "{{complex_goName}}"^^xsd:string .
 				
-                 :{{pw_id}}_{{catalysis_node_num}}_GC-Stoichiometry{{control_comp_nodeNum}}  rdf:type bp:Stoichiometry ;
+                     :{{pw_id}}_{{catalysis_node_num}}_GC-Stoichiometry{{control_comp_nodeNum}}  rdf:type bp:Stoichiometry ;
                             bp:physicalEntity :{{pw_id}}_GC-{{control_comp_nodeName}} .
                            # bp:stoichiometricCoefficient "1.0"^^xsd:float .
-            
-            {{/if}}
+                {{/if}}
               
-            {{#if complex_autoCompose_name}} 
-             	:{{pw_id}}_GC-{{control_node_name}} bp:component :{{pw_id}}_GC-{{control_comp_nodeName}} 
+                {{#if complex_autoCompose_name}} 
+             	    :{{pw_id}}_GC-{{control_node_name}} bp:component :{{pw_id}}_GC-{{control_comp_nodeName}} 
             
-            {{/if}}
-              
-              
-            
-          
-           
-    	{{/if}}
-         
-         
-         
-         
-        
+                {{/if}}
+         {{/if}}
          
        {{#if control_action}}
-         
+           :{{pw_id}}_GC-Catalysis{{catalysis_node_num}} bp:controlType "{{control_action}}"^^xsd:string .
        {{/if}} 
+         
     }   
  }
 

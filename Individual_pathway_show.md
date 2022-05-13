@@ -11,17 +11,9 @@ http://path-virtuoso:8890/sparql
 ```sparql
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX bp: <http://www.biopax.org/release/biopax-level3.owl#>
-PREFIX cco: <http://www.biocyc.org/owl/ontologies/ocelot/cco/#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX glycordf: <http://purl.jp/bio/12/glyco/glycan#>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
-PREFIX gno: <http://purl.obolibrary.org/obo/GNO:>
 PREFIX glycosmos: <http://glycosmos.org/biopax/1/562#>
-PREFIX glytoucan: <http://identifiers.org/glytoucan/>
-PREFIX uniprot: <http://identifiers.org/uniprot/>
 PREFIX pubchem: <http://pubchem.ncbi.nlm.nih.gov/compound/>
-PREFIX ncbitax: <http://purl.bioontology.org/ontology/NCBITAXON/>
 PREFIX sio: <http://semanticscience.org/resource/>
 PREFIX pwid: <http://glycosmos.org/biopax/pathway#>
 
